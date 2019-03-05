@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit{
     filteredProducts: IProduct[];
     products: IProduct[] = [];
 
-    constructor() {
+    constructor(private productService: ProductService) {
         this.filteredProducts = this.products;
         this.listFilter = ''
     }
@@ -46,19 +46,22 @@ export class ProductListComponent implements OnInit{
     togglePrice(): void {
         this.showPrice = !this.showPrice;
     } 
-
-    ngOnInit(): void {
-        this.productService.getProducts().subscribe(
-            products => this.products = products,
-            error => this.errorMessage = <any> error
-        );
-    }
-
+    
     onRatingClicked(message: string): void {
         this.pageTitle = 'Product List: ' + message;
     }
 
     onProductClicked(message: string): void {
         this.pageTitle = 'Product List: ' + message;
+    }
+
+    ngOnInit(): void {
+        this.productService.getProducts().subscribe(
+            products => {
+                this.products = products;
+                this.filteredProducts = this.products;        
+            },
+            error => this.errorMessage = <any> error
+        );   
     }
 }
