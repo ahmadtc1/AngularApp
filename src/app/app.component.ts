@@ -5,7 +5,7 @@ import {Component} from '@angular/core';
   template: `
   <nav class = 'navbar navbar-expand navbar-light bg-light'>
     <a class = 'navbar-brand'>
-      {{pageTitle}}
+      {{ pageTitle | ConvertFirstLetterUppercasePipe }}
     </a>
     <ul class = 'nav nav-pills'>
       <li><a class = 'nav-link' [routerLink] = "['/welcome']">Home</a></li>
@@ -19,5 +19,5 @@ import {Component} from '@angular/core';
 })
 
 export class AppComponent {
-  pageTitle: string = 'Ahmad Product Management';
+  pageTitle: string = 'ahmad Product Management';
 }
